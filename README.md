@@ -6,6 +6,7 @@ Email: i.pinchuk.work@gmail.com
 ![Travis build](https://travis-ci.org/somework/offset-page-logic.svg?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/somework/offset-page-logic/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/somework/offset-page-logic/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/871fdfea-e1e2-4251-bb8c-f8b12e085eaf/mini.png)](https://insight.sensiolabs.com/projects/871fdfea-e1e2-4251-bb8c-f8b12e085eaf)
+[![StyleCI](https://styleci.io/repos/93328300/shield?branch=master)](https://styleci.io/repos/93328300)
 
 Package that handle problem when you have only page, pagesize source interface and you need offset limit interface
 
