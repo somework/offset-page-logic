@@ -116,7 +116,7 @@ class OffsetTest extends TestCase
                     'size' => 10,
                 ],
             ],
-            /**
+            /*
              * offset=0;limit=0;nowCount>0;
              * @see \SomeWork\OffsetPage\Logic\Tests\OffsetTest::testNowCountException()
              * Exception
@@ -154,7 +154,7 @@ class OffsetTest extends TestCase
                     'size' => 22,
                 ],
             ],
-            /**
+            /*
              * offset=0;limit=0;nowCount>0;
              * offset=0;limit>0;nowCount>0;limit<nowCount;
              * offset=0;limit>0;nowCount>0;limit=nowCount;
@@ -290,7 +290,7 @@ class OffsetTest extends TestCase
                     'size' => 23,
                 ],
             ],
-            /**
+            /*
              * offset>0;limit>0;nowCount>0;limit=nowCount;
              * offset>0;limit>0;nowCount>0;limit<nowCount;
              * @see \SomeWork\OffsetPage\Logic\Tests\OffsetTest::testNowCountException()
