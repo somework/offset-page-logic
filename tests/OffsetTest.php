@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the SomeWork/OffsetPage package.
+ * This file is part of the SomeWork/OffsetPage/Logic package.
  *
  * (c) Pinchuk Igor <i.pinchuk.work@gmail.com>
  *
@@ -28,7 +28,12 @@ class OffsetTest extends TestCase
     public function testOneMoreThanZero($offset, $limit, $nowCount, $expectedResult)
     {
         $result = Offset::logic($offset, $limit, $nowCount);
-        $this->assertEquals($expectedResult, $result);
+        if (null === $expectedResult) {
+            $this->assertEquals($expectedResult, $result);
+        } else {
+            $this->assertEquals($expectedResult['page'], $result->getPage());
+            $this->assertEquals($expectedResult['size'], $result->getSize());
+        }
     }
 
     /**
@@ -43,7 +48,7 @@ class OffsetTest extends TestCase
                 'nowCount'       => 0,
                 'expectedResult' => [
                     'page'  => 0,
-                    'limit' => 0,
+                    'size' => 0,
                 ],
             ],
             'offset>0;limit=0;nowCount=0;' => [
@@ -84,7 +89,12 @@ class OffsetTest extends TestCase
     public function testOffsetZero($offset, $limit, $nowCount, $expectedResult)
     {
         $result = Offset::logic($offset, $limit, $nowCount);
-        $this->assertEquals($expectedResult, $result);
+        if (null === $expectedResult) {
+            $this->assertEquals($expectedResult, $result);
+        } else {
+            $this->assertEquals($expectedResult['page'], $result->getPage());
+            $this->assertEquals($expectedResult['size'], $result->getSize());
+        }
     }
 
     /**
@@ -137,7 +147,12 @@ class OffsetTest extends TestCase
     public function testLimitZero($offset, $limit, $nowCount, $expectedResult)
     {
         $result = Offset::logic($offset, $limit, $nowCount);
-        $this->assertEquals($expectedResult, $result);
+        if (null === $expectedResult) {
+            $this->assertEquals($expectedResult, $result);
+        } else {
+            $this->assertEquals($expectedResult['page'], $result->getPage());
+            $this->assertEquals($expectedResult['size'], $result->getSize());
+        }
     }
 
     /**
@@ -196,7 +211,12 @@ class OffsetTest extends TestCase
     public function testLimitOffsetMoreThanZero($offset, $limit, $nowCount, $expectedResult)
     {
         $result = Offset::logic($offset, $limit, $nowCount);
-        $this->assertEquals($expectedResult, $result);
+        if (null === $expectedResult) {
+            $this->assertEquals($expectedResult, $result);
+        } else {
+            $this->assertEquals($expectedResult['page'], $result->getPage());
+            $this->assertEquals($expectedResult['size'], $result->getSize());
+        }
     }
 
     /**

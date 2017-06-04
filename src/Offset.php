@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the SomeWork/OffsetPage package.
+ * This file is part of the SomeWork/OffsetPage/Logic package.
  *
  * (c) Pinchuk Igor <i.pinchuk.work@gmail.com>
  *
@@ -18,7 +18,7 @@ class Offset
      * @param int $limit
      * @param int $nowCount
      *
-     * @return array|null
+     * @return OffsetLogicResult|null
      * @throws \LogicException
      */
     public static function logic($offset, $limit, $nowCount = 0)
@@ -35,7 +35,7 @@ class Offset
          * Means that you should get all
          */
         if ($offset === 0 && $limit === 0 && $nowCount === 0) {
-            return ['page' => 0, 'limit' => 0];
+            return new OffsetLogicResult(0, 0);
         }
 
         /**
@@ -46,11 +46,11 @@ class Offset
         }
 
         if ($offset === 0 && $limit > 0 && $nowCount === 0) {
-            return ['page' => 1, 'size' => $limit];
+            return new OffsetLogicResult(1, $limit);
         }
 
         if ($offset > 0 && $limit === 0) {
-            return ['page' => 2, 'size' => $nowCount + $offset];
+            return new OffsetLogicResult(2, $nowCount + $offset);
         }
 
         if ($limit > 0 && $nowCount > 0) {
@@ -65,15 +65,18 @@ class Offset
 
         if ($offset > 0 && $limit > 0) {
             if ($offset === $limit) {
-                return ['page' => 2, 'size' => $limit];
+                return new OffsetLogicResult(2, $limit);
             }
             if ($offset < $limit) {
-                return ['page' => 2, 'size' => $offset];
+                return new OffsetLogicResult(2, $offset);
             }
             if ($offset > $limit) {
                 for ($i = $limit; $i > 0; $i--) {
                     if ($offset % $i === 0) {
-                        return ['page' => ($offset / $i) + 1, 'size' => $i];
+                        return new OffsetLogicResult(
+                            ($offset / $i) + 1,
+                            $i
+                        );
                     }
                 }
             }
