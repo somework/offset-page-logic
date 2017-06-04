@@ -1,8 +1,9 @@
 # Offset Page Logic
 
-Author: [Igor Pinchuk](https://github.com/somework "Github")
-
+Author: [Igor Pinchuk](https://github.com/somework "Github")  
 Email: i.pinchuk.work@gmail.com
+
+![Travis build](https://travis-ci.org/somework/offset-page-logic.svg?branch=master)
 
 Package that handle problem when you have only page, pagesize source interface and you need offset limit interface
 
