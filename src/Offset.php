@@ -18,8 +18,9 @@ class Offset
      * @param int $limit
      * @param int $nowCount
      *
-     * @return OffsetLogicResult
      * @throws \LogicException
+     *
+     * @return OffsetLogicResult
      */
     public static function logic($offset, $limit, $nowCount = 0)
     {
@@ -31,7 +32,7 @@ class Offset
         $limit = $limit >= 0 ? $limit : 0;
         $nowCount = $nowCount >= 0 ? $nowCount : 0;
 
-        /**
+        /*
          * Means that you should get all
          */
         if ($offset === 0 && $limit === 0 && $nowCount === 0) {
@@ -50,7 +51,7 @@ class Offset
             if ($limit > $nowCount) {
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }
-            /**
+            /*
              * Means that you should stop fetching
              */
             throw new AlreadyGetNeededCountException('Limit <= no count. You should stop asking (:');
@@ -75,7 +76,7 @@ class Offset
             }
         }
 
-        /**
+        /*
          * Really its can be here oO
          */
         throw new \LogicException('Something gone wrong');

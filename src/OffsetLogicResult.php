@@ -44,6 +44,7 @@ class OffsetLogicResult
     public function setPage($page)
     {
         $this->page = (int) $page >= 0 ? (int) $page : 0;
+
         return $this;
     }
 
@@ -63,6 +64,7 @@ class OffsetLogicResult
     public function setSize($size)
     {
         $this->size = (int) $size > 0 ? (int) $size : 0;
+
         return $this;
     }
 }
