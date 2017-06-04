@@ -1,0 +1,28 @@
+{
+  "name": "somework/offset-page-logic",
+  "description": "Logic to convert offset request to page request",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Pinchuk Igor",
+      "email": "i.pinchuk.work@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "SomeWork\\OffsetPage\\Logic\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SomeWork\\OffsetPage\\Logic\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  }
+}
