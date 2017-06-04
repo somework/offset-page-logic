@@ -18,7 +18,7 @@ class Offset
      * @param int $limit
      * @param int $nowCount
      *
-     * @return OffsetLogicResult|null
+     * @return OffsetLogicResult
      * @throws \LogicException
      */
     public static function logic($offset, $limit, $nowCount = 0)
@@ -38,13 +38,6 @@ class Offset
             return new OffsetLogicResult(0, 0);
         }
 
-        /**
-         * Means that you should stop fetching
-         */
-        if ($offset === 0 && $limit === 0 && $nowCount > 0) {
-            return null;
-        }
-
         if ($offset === 0 && $limit > 0 && $nowCount === 0) {
             return new OffsetLogicResult(1, $limit);
         }
@@ -53,7 +46,7 @@ class Offset
             return new OffsetLogicResult(2, $nowCount + $offset);
         }
 
-        if ($limit > 0 && $nowCount > 0) {
+        if ($nowCount > 0) {
             if ($limit > $nowCount) {
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }

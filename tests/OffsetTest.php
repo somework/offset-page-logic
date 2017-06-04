@@ -23,6 +23,62 @@ class OffsetTest extends TestCase
      * @param $nowCount
      * @param $expectedResult
      *
+     * @dataProvider limitNowCountProvider
+     */
+    public function testLimitNowCount($offset, $limit, $nowCount, $expectedResult)
+    {
+        $result = Offset::logic($offset, $limit, $nowCount);
+
+        if (null === $expectedResult) {
+            $this->assertEquals($expectedResult, $result);
+        } else {
+            $this->assertEquals($expectedResult['page'], $result->getPage());
+            $this->assertEquals($expectedResult['size'], $result->getSize());
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function limitNowCountProvider()
+    {
+        return [
+            'offset=0;limit=5;nowCount=2;' => [
+                'offset'         => 0,
+                'limit'          => 5,
+                'nowCount'       => 2,
+                'expectedResult' => [
+                    'page' => 2,
+                    'size' => 2,
+                ],
+            ],
+            'offset=0;limit=5;nowCount=4;' => [
+                'offset'         => 0,
+                'limit'          => 5,
+                'nowCount'       => 4,
+                'expectedResult' => [
+                    'page' => 5,
+                    'size' => 1,
+                ],
+            ],
+            'offset=0;limit=5;nowCount=0;' => [
+                'offset'         => 0,
+                'limit'          => 5,
+                'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 1,
+                    'size' => 5,
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @param $offset
+     * @param $limit
+     * @param $nowCount
+     * @param $expectedResult
+     *
      * @dataProvider oneMoreThanZeroProvider
      */
     public function testOneMoreThanZero($offset, $limit, $nowCount, $expectedResult)
@@ -47,7 +103,7 @@ class OffsetTest extends TestCase
                 'limit'          => 0,
                 'nowCount'       => 0,
                 'expectedResult' => [
-                    'page'  => 0,
+                    'page' => 0,
                     'size' => 0,
                 ],
             ],
@@ -69,12 +125,11 @@ class OffsetTest extends TestCase
                     'size' => 10,
                 ],
             ],
-            'offset=0;limit=0;nowCount>0;' => [
-                'offset'         => 0,
-                'limit'          => 0,
-                'nowCount'       => 33,
-                'expectedResult' => null,
-            ],
+            /**
+             * offset=0;limit=0;nowCount>0;
+             * @see \SomeWork\OffsetPage\Logic\Tests\OffsetTest::testNowCountException()
+             * Exception
+             */
         ];
     }
 
@@ -112,13 +167,8 @@ class OffsetTest extends TestCase
                     'size' => 22,
                 ],
             ],
-            'offset=0;limit=0;nowCount>0;'                => [
-                'offset'         => 0,
-                'limit'          => 0,
-                'nowCount'       => 22,
-                'expectedResult' => null,
-            ],
             /**
+             * offset=0;limit=0;nowCount>0;
              * offset=0;limit>0;nowCount>0;limit<nowCount;
              * offset=0;limit>0;nowCount>0;limit=nowCount;
              * @see \SomeWork\OffsetPage\Logic\Tests\OffsetTest::testNowCountException()
@@ -285,6 +335,11 @@ class OffsetTest extends TestCase
     public function nowCountExceptionProvider()
     {
         return [
+            'offset=0;limit=0;nowCount>0;'                => [
+                'offset'   => 0,
+                'limit'    => 0,
+                'nowCount' => 22,
+            ],
             'offset>0;limit>0;nowCount>0;limit=nowCount;' => [
                 'offset'   => 22,
                 'limit'    => 33,
