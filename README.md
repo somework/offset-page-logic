@@ -2,7 +2,7 @@
 
 Author: [Igor Pinchuk](https://github.com/somework "Github")
 
-Email: [i.pinchuk.work@gmail.com](i.pinchuk.work@gmail.com)
+Email: i.pinchuk.work@gmail.com
 
 Package that handle problem when you have only page, pagesize source interface and you need offset limit interface
 
