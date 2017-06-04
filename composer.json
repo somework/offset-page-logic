@@ -1,7 +1,6 @@
 {
   "name": "somework/offset-page-logic",
   "description": "Logic to convert offset request to page request",
-  "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
     {
