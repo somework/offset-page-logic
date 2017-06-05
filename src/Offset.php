@@ -19,6 +19,7 @@ class Offset
      * @param int $nowCount
      *
      * @throws \LogicException
+     * @throws \SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException
      *
      * @return OffsetLogicResult
      */
