@@ -11,6 +11,6 @@
 
 namespace SomeWork\OffsetPage\Logic;
 
-class AlreadyGetNeededCountException extends \LogicException
+class AlreadyGetNeededCountLogicException extends OffsetLogicException
 {
 }

@@ -19,6 +19,7 @@ class Offset
      * @param int $nowCount
      *
      * @throws \LogicException
+     * @throws \SomeWork\OffsetPage\Logic\AlreadyGetNeededCountLogicException
      *
      * @return OffsetLogicResult
      */
@@ -54,7 +55,7 @@ class Offset
             /*
              * Means that you should stop fetching
              */
-            throw new AlreadyGetNeededCountException('Limit <= no count. You should stop asking (:');
+            throw new AlreadyGetNeededCountLogicException('Limit <= no count. You should stop asking (:');
         }
 
         if ($offset > 0 && $limit > 0) {
