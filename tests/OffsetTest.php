@@ -12,7 +12,7 @@
 namespace SomeWork\OffsetPage\Logic\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SomeWork\OffsetPage\Logic\AlreadyGetNeededCountLogicException;
+use SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException;
 use SomeWork\OffsetPage\Logic\Offset;
 
 class OffsetTest extends TestCase
@@ -307,7 +307,7 @@ class OffsetTest extends TestCase
      */
     public function testNowCountException($offset, $limit, $nowCount)
     {
-        $this->setExpectedException(AlreadyGetNeededCountLogicException::class);
+        $this->setExpectedException(AlreadyGetNeededCountException::class);
         Offset::logic($offset, $limit, $nowCount);
     }
 
