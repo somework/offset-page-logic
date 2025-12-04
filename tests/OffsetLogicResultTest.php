@@ -32,7 +32,7 @@ class OffsetLogicResultTest extends TestCase
 
     public function testWrongCreate()
     {
-        $offsetLogicResult = new OffsetLogicResult('wef', -22);
+        $offsetLogicResult = new OffsetLogicResult(-1, -22);
         $this->assertEquals(0, $offsetLogicResult->getPage());
         $this->assertEquals(0, $offsetLogicResult->getSize());
     }
