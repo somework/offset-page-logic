@@ -52,9 +52,7 @@ class Offset
             if ($limit > $nowCount) {
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }
-            /*
-             * Means that you should stop fetching
-             */
+            // Means that you should stop fetching
             throw new AlreadyGetNeededCountException('Limit <= no count. You should stop asking (:');
         }
 
