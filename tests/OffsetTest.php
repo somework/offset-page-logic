@@ -21,6 +21,8 @@ class OffsetTest extends TestCase
 {
     /**
      * @dataProvider limitNowCountProvider
+     *
+     * @param array{page:int, size:int} $expectedResult
      */
     public function testLimitNowCount(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
@@ -29,6 +31,9 @@ class OffsetTest extends TestCase
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int, expectedResult: array{page:int, size:int}}>
+     */
     public static function limitNowCountProvider(): array
     {
         return [
@@ -64,6 +69,8 @@ class OffsetTest extends TestCase
 
     /**
      * @dataProvider oneMoreThanZeroProvider
+     *
+     * @param array{page:int, size:int} $expectedResult
      */
     public function testOneMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
@@ -72,6 +79,9 @@ class OffsetTest extends TestCase
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int, expectedResult: array{page:int, size:int}}>
+     */
     public static function oneMoreThanZeroProvider(): array
     {
         return [
@@ -112,6 +122,8 @@ class OffsetTest extends TestCase
 
     /**
      * @dataProvider offsetZeroProvider
+     *
+     * @param array{page:int, size:int} $expectedResult
      */
     public function testOffsetZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
@@ -120,6 +132,9 @@ class OffsetTest extends TestCase
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int, expectedResult: array{page:int, size:int}}>
+     */
     public static function offsetZeroProvider(): array
     {
         return [
@@ -153,6 +168,8 @@ class OffsetTest extends TestCase
 
     /**
      * @dataProvider limitZeroProvider
+     *
+     * @param array{page:int, size:int} $expectedResult
      */
     public function testLimitZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
@@ -161,6 +178,9 @@ class OffsetTest extends TestCase
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int, expectedResult: array{page:int, size:int}}>
+     */
     public static function limitZeroProvider(): array
     {
         return [
@@ -205,6 +225,8 @@ class OffsetTest extends TestCase
 
     /**
      * @dataProvider limitOffsetMoreThanZeroProvider
+     *
+     * @param array{page:int, size:int} $expectedResult
      */
     public function testLimitOffsetMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
@@ -213,6 +235,9 @@ class OffsetTest extends TestCase
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int, expectedResult: array{page:int, size:int}}>
+     */
     public static function limitOffsetMoreThanZeroProvider(): array
     {
         return [
@@ -270,6 +295,9 @@ class OffsetTest extends TestCase
         Offset::logic($offset, $limit, $nowCount);
     }
 
+    /**
+     * @return array<string, array{offset:int, limit:int, nowCount:int}>
+     */
     public static function nowCountExceptionProvider(): array
     {
         return [
