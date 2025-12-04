@@ -35,7 +35,7 @@ class OffsetTest extends TestCase
     /**
      * @return array
      */
-    public function limitNowCountProvider()
+    public static function limitNowCountProvider()
     {
         return [
             'offset=0;limit=5;nowCount=2;' => [
@@ -86,7 +86,7 @@ class OffsetTest extends TestCase
     /**
      * @return array
      */
-    public function oneMoreThanZeroProvider()
+    public static function oneMoreThanZeroProvider()
     {
         return [
             'offset=0;limit=0;nowCount=0;' => [
@@ -142,7 +142,7 @@ class OffsetTest extends TestCase
     /**
      * @return array
      */
-    public function offsetZeroProvider()
+    public static function offsetZeroProvider()
     {
         return [
             'offset=0;limit>0;nowCount=0;'                => [
@@ -191,7 +191,7 @@ class OffsetTest extends TestCase
     /**
      * @return array
      */
-    public function limitZeroProvider()
+    public static function limitZeroProvider()
     {
         return [
             'offset>0;limit=0;nowCount=0;'                 => [
@@ -251,7 +251,7 @@ class OffsetTest extends TestCase
     /**
      * @return array
      */
-    public function limitOffsetMoreThanZeroProvider()
+    public static function limitOffsetMoreThanZeroProvider()
     {
         return [
             'offset>0;limit>0;nowCount=0;'                                      => [
@@ -307,11 +307,11 @@ class OffsetTest extends TestCase
      */
     public function testNowCountException($offset, $limit, $nowCount)
     {
-        $this->setExpectedException(AlreadyGetNeededCountException::class);
+        $this->expectException(AlreadyGetNeededCountException::class);
         Offset::logic($offset, $limit, $nowCount);
     }
 
-    public function nowCountExceptionProvider()
+    public static function nowCountExceptionProvider()
     {
         return [
             'offset=0;limit=0;nowCount>0;'                => [

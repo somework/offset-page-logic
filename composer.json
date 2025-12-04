@@ -1,6 +1,14 @@
 {
   "name": "somework/offset-page-logic",
-  "description": "Logic to convert offset request to page request",
+  "description": "Utility functions to convert offset/limit requests into page/page-size arguments",
+  "keywords": [
+    "pagination",
+    "offset",
+    "limit",
+    "page",
+    "converter"
+  ],
+  "homepage": "https://github.com/somework/offset-page-logic",
   "license": "MIT",
   "authors": [
     {
@@ -19,9 +27,17 @@
     }
   },
   "require": {
-    "php": ">=5.5"
+    "php": "^8.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^4.8"
+    "phpunit/phpunit": "^10.5",
+    "phpstan/phpstan": "^1.12",
+    "friendsofphp/php-cs-fixer": "^3.91"
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "stan": "vendor/bin/phpstan analyse src tests",
+    "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "cs-fix": "vendor/bin/php-cs-fixer fix"
   }
 }
