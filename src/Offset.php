@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SomeWork/OffsetPage/Logic package.
  *
@@ -23,12 +25,8 @@ class Offset
      *
      * @return OffsetLogicResult
      */
-    public static function logic($offset, $limit, $nowCount = 0)
+    public static function logic(int $offset, int $limit, int $nowCount = 0): OffsetLogicResult
     {
-        $offset = (int) $offset;
-        $limit = (int) $limit;
-        $nowCount = (int) $nowCount;
-
         $offset = $offset >= 0 ? $offset : 0;
         $limit = $limit >= 0 ? $limit : 0;
         $nowCount = $nowCount >= 0 ? $nowCount : 0;
