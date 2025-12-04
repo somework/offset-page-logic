@@ -308,6 +308,7 @@ class OffsetTest extends TestCase
     public function testNowCountException($offset, $limit, $nowCount)
     {
         $this->expectException(AlreadyGetNeededCountException::class);
+        $this->expectExceptionMessage('Limit is less than or equal to the current count. You should stop asking.');
         Offset::logic($offset, $limit, $nowCount);
     }
 

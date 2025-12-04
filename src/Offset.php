@@ -51,7 +51,7 @@ class Offset
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }
 
-            throw new AlreadyGetNeededCountException('Limit is less than or equal to the current count. You should stop asking (:');
+            throw new AlreadyGetNeededCountException('Limit is less than or equal to the current count. You should stop asking.');
         }
 
         if ($offset > 0 && $limit > 0) {
