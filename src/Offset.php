@@ -52,6 +52,7 @@ class Offset
             if ($limit > $nowCount) {
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }
+
             throw new AlreadyGetNeededCountException('Limit is less than or equal to the current count. You should stop asking (:');
         }
 
@@ -77,6 +78,7 @@ class Offset
         /*
          * This branch should be unreachable.
          */
+
         throw new \LogicException('Unexpected offset/limit combination encountered');
     }
 }
