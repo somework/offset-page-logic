@@ -46,14 +46,14 @@ into page-based pagination:
   `AlreadyGetNeededCountException` to signal that all required rows are already
   retrieved.
 
-| Offset | Limit | nowCount | Outcome | Notes |
-| --- | --- | --- | --- | --- |
-| `0` | `0` | `0` | Page `0`, Size `0` | Zeroed inputs return a sentinel “all rows” response. |
-| `0` | `10` | `0` | Page `1`, Size `10` | Limit-only scenario with a page starting at `1`. |
-| `22` | `0` | `0` | Page `2`, Size `22` | Offset-only scenario; size grows with the offset. |
-| `0` | `22` | `10` | Page `2`, Size `10` | Limit exceeds `nowCount`; recursion reduces the limit. |
-| `44` | `22` | `0` | Page `3`, Size `22` | Standard offset/limit division (`44/22 + 1`). |
-| `0` | `5` | `5` | Throws `AlreadyGetNeededCountException` | Requested limit is already satisfied by `nowCount`. |
+| Offset | Limit | nowCount | Outcome                                 | Notes                                                  |
+|--------|-------|----------|-----------------------------------------|--------------------------------------------------------|
+| `0`    | `0`   | `0`      | Page `0`, Size `0`                      | Zeroed inputs return a sentinel “all rows” response.   |
+| `0`    | `10`  | `0`      | Page `1`, Size `10`                     | Limit-only scenario with a page starting at `1`.       |
+| `22`   | `0`   | `0`      | Page `2`, Size `22`                     | Offset-only scenario; size grows with the offset.      |
+| `0`    | `22`  | `10`     | Page `2`, Size `10`                     | Limit exceeds `nowCount`; recursion reduces the limit. |
+| `44`   | `22`  | `0`      | Page `3`, Size `22`                     | Standard offset/limit division (`44/22 + 1`).          |
+| `0`    | `5`   | `5`      | Throws `AlreadyGetNeededCountException` | Requested limit is already satisfied by `nowCount`.    |
 
 ```php
 use SomeWork\OffsetPage\Logic\Offset;
