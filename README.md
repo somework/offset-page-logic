@@ -1,35 +1,66 @@
 # Offset Page Logic
 
-Author: [Igor Pinchuk](https://github.com/somework "Github")  
+Author: [Igor Pinchuk](https://github.com/somework "Github")
 Email: i.pinchuk.work@gmail.com
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/somework/offset-page-logic/ci.yml?branch=master&label=Tests)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml?query=branch%3Amaster)
-[![Quality](https://img.shields.io/github/actions/workflow/status/somework/offset-page-logic/ci.yml?branch=master&label=Quality)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml?query=branch%3Amaster)
+[![CI](https://img.shields.io/github/actions/workflow/status/somework/offset-page-logic/ci.yml?branch=master&label=CI)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Latest Stable Version](https://img.shields.io/packagist/v/somework/offset-page-logic.svg)](https://packagist.org/packages/somework/offset-page-logic)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-Package that handle problem when you have only page, pagesize source interface and you need offset limit interface
+Utility functions to convert offset/limit requests into page/page-size arguments.
 
-```php
-$offset = 0;
-$limit = 0;
-$nowCount = 0;
+## Installation
 
-$result = \SomeWork\OffsetPage\Logic\Offset::logic($offset, $limit, $nowCount);
-$result->getPage(); //0
-$result->getSize(); //0
+Install the package via Composer:
+
+```bash
+composer require somework/offset-page-logic
 ```
 
+## Usage
+
+`Offset::logic()` returns a DTO containing the calculated page (1-based) and page size
+for the given offset and limit. The method also guards against requesting more
+rows than are available.
+
 ```php
+use SomeWork\OffsetPage\Logic\Offset;
+
+$offset = 0;  // start from the first record
+$limit = 10;  // request ten records
+$nowCount = 42; // total records already processed or available
+
+$result = Offset::logic($offset, $limit, $nowCount);
+
+$result->getPage(); // 1 (first page)
+$result->getSize(); // 10 (page size derived from limit)
+```
+
+If the requested limit would exceed the available records, an exception is thrown:
+
+```php
+use SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException;
+use SomeWork\OffsetPage\Logic\Offset;
+
 $offset = 0;
 $limit = 5;
 $nowCount = 5;
 
-$result = \SomeWork\OffsetPage\Logic\Offset::logic($offset, $limit, $nowCount);
-// Throw exception \SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException
+$result = Offset::logic($offset, $limit, $nowCount); // throws AlreadyGetNeededCountException
 ```
- 
+
+## Development
+
+Run the automated checks locally using Composer scripts:
+
+```bash
+composer install
+composer test       # PHPUnit test suite
+composer stan       # PHPStan static analysis
+composer cs-check   # PHP CS Fixer dry-run for coding standards
+```
+
 License
 ----
 
-MIT  
+MIT
