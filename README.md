@@ -20,39 +20,47 @@ composer require somework/offset-page-logic
 
 `Offset::logic()` returns a DTO containing the calculated page (1-based) and page size
 for the given offset and limit. The method also guards against requesting more
-rows than are available.
+rows than are available. All inputs are strict integers; negative values are coerced to
+`0`.
 
 ## Behavior
 
 `Offset::logic()` branches through several scenarios to normalize offset/limit inputs
 into page-based pagination:
 
-* **Unconstrained requests** – when neither `offset` nor `limit` is provided, the
-  method assumes the first page with the default page size.
-* **Offset-only** – a provided `offset` derives the page from the offset divisor with
-  the page size unchanged.
-* **Limit-only** – a provided `limit` sets the page size while the page remains `1`.
-* **Offset > limit divisor logic** – when both are provided and the offset exceeds the
-  limit, the page is calculated from the integer division `offset / limit + 1`.
-* **`AlreadyGetNeededCountException` condition** – if `offset + limit` would exceed
-  the available records (`nowCount`), the method throws
+* **Zeroed inputs** – if `offset`, `limit`, and `nowCount` are all `0`, the method
+  returns page `0` and size `0`, representing a request for “everything” without
+  pagination.
+* **Limit-only** – with `offset` at `0`, a positive `limit` sets the page size while
+  the page is `1`.
+* **Offset-only** – with `limit` at `0`, a positive `offset` yields page `2` and a
+  size of `offset + nowCount` (the offset is always at least the page size).
+* **Limit exceeds current count** – when `nowCount` is positive and smaller than the
+  requested `limit`, the method recurses by subtracting `nowCount` from `limit` and
+  adding it to `offset`, then resolves the pagination with the remaining values.
+* **Standard offset/limit division** – when both are positive and `nowCount` is `0`,
+  the page and size are derived from `offset` divided by `limit`, using the largest
+  divisor of the offset to maximize page size.
+* **`AlreadyGetNeededCountException` condition** – if `nowCount` is positive and not
+  less than the requested `limit`, the method throws
   `AlreadyGetNeededCountException` to signal that all required rows are already
   retrieved.
 
 | Offset | Limit | nowCount | Outcome | Notes |
 | --- | --- | --- | --- | --- |
-| `null` | `null` | `100` | Page `1`, Size default | Unconstrained request uses defaults. |
-| `20` | `null` | `100` | Page derived from offset, Size default | Offset-only scenario. |
-| `null` | `25` | `100` | Page `1`, Size `25` | Limit-only scenario. |
-| `40` | `20` | `100` | Page `3`, Size `20` | Offset > limit divisor logic (`40/20 + 1`). |
-| `80` | `30` | `100` | Throws `AlreadyGetNeededCountException` | Offset + limit exceeds available rows. |
+| `0` | `0` | `0` | Page `0`, Size `0` | Zeroed inputs return a sentinel “all rows” response. |
+| `0` | `10` | `0` | Page `1`, Size `10` | Limit-only scenario with a page starting at `1`. |
+| `22` | `0` | `0` | Page `2`, Size `22` | Offset-only scenario; size grows with the offset. |
+| `0` | `22` | `10` | Page `2`, Size `10` | Limit exceeds `nowCount`; recursion reduces the limit. |
+| `44` | `22` | `0` | Page `3`, Size `22` | Standard offset/limit division (`44/22 + 1`). |
+| `0` | `5` | `5` | Throws `AlreadyGetNeededCountException` | Requested limit is already satisfied by `nowCount`. |
 
 ```php
 use SomeWork\OffsetPage\Logic\Offset;
 
 $offset = 0;  // start from the first record
 $limit = 10;  // request ten records
-$nowCount = 42; // total records already processed or available
+$nowCount = 0; // no rows have been processed yet
 
 $result = Offset::logic($offset, $limit, $nowCount);
 
@@ -60,7 +68,7 @@ $result->getPage(); // 1 (first page)
 $result->getSize(); // 10 (page size derived from limit)
 ```
 
-If the requested limit would exceed the available records, an exception is thrown:
+If the requested limit is already satisfied by `nowCount`, an exception is thrown:
 
 ```php
 use SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException;
