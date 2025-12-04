@@ -277,6 +277,33 @@ class OffsetTest extends TestCase
                     'size' => 23,
                 ],
             ],
+            'offset>limit;limit|offset;'                                       => [
+                'offset'         => 44,
+                'limit'          => 22,
+                'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 3,
+                    'size' => 22,
+                ],
+            ],
+            'offset>limit;limit!|offset;limit%offset;divisible;'               => [
+                'offset'         => 45,
+                'limit'          => 22,
+                'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 4,
+                    'size' => 15,
+                ],
+            ],
+            'offset>limit;limit!|offset;limit%offset;not-divisible;'           => [
+                'offset'         => 47,
+                'limit'          => 22,
+                'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 48,
+                    'size' => 1,
+                ],
+            ],
             /*
              * offset>0;limit>0;nowCount>0;limit=nowCount;
              * offset>0;limit>0;nowCount>0;limit<nowCount;
