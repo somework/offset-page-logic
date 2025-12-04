@@ -46,6 +46,15 @@ class OffsetTest extends TestCase
                     'size' => 2,
                 ],
             ],
+            'offset<0;limit=5;nowCount=2;' => [
+                'offset'         => -5,
+                'limit'          => 5,
+                'nowCount'       => 2,
+                'expectedResult' => [
+                    'page' => 2,
+                    'size' => 2,
+                ],
+            ],
             'offset=0;limit=5;nowCount=4;' => [
                 'offset'         => 0,
                 'limit'          => 5,
@@ -59,6 +68,15 @@ class OffsetTest extends TestCase
                 'offset'         => 0,
                 'limit'          => 5,
                 'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 1,
+                    'size' => 5,
+                ],
+            ],
+            'offset=0;limit=5;nowCount<0;' => [
+                'offset'         => 0,
+                'limit'          => 5,
+                'nowCount'       => -3,
                 'expectedResult' => [
                     'page' => 1,
                     'size' => 5,
@@ -89,6 +107,15 @@ class OffsetTest extends TestCase
                 'offset'         => 0,
                 'limit'          => 0,
                 'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 0,
+                    'size' => 0,
+                ],
+            ],
+            'offset<0;limit<0;nowCount<0;' => [
+                'offset'         => -1,
+                'limit'          => -1,
+                'nowCount'       => -1,
                 'expectedResult' => [
                     'page' => 0,
                     'size' => 0,
@@ -163,6 +190,15 @@ class OffsetTest extends TestCase
                     'size' => 10,
                 ],
             ],
+            'offset<0;limit>0;nowCount>0;limit>nowCount;' => [
+                'offset'         => -3,
+                'limit'          => 22,
+                'nowCount'       => 10,
+                'expectedResult' => [
+                    'page' => 2,
+                    'size' => 10,
+                ],
+            ],
         ];
     }
 
@@ -188,6 +224,15 @@ class OffsetTest extends TestCase
                 'offset'         => 22,
                 'limit'          => 0,
                 'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 2,
+                    'size' => 22,
+                ],
+            ],
+            'offset>0;limit<0;nowCount<0;'                  => [
+                'offset'         => 22,
+                'limit'          => -10,
+                'nowCount'       => -5,
                 'expectedResult' => [
                     'page' => 2,
                     'size' => 22,
@@ -245,6 +290,15 @@ class OffsetTest extends TestCase
                 'offset'         => 22,
                 'limit'          => 33,
                 'nowCount'       => 0,
+                'expectedResult' => [
+                    'page' => 2,
+                    'size' => 22,
+                ],
+            ],
+            'offset>0;limit>0;nowCount<0;'                                      => [
+                'offset'         => 22,
+                'limit'          => 33,
+                'nowCount'       => -5,
                 'expectedResult' => [
                     'page' => 2,
                     'size' => 22,
