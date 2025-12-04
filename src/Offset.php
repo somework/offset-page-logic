@@ -65,7 +65,7 @@ class Offset
                 for ($i = $limit; $i > 0; $i--) {
                     if ($offset % $i === 0) {
                         return new OffsetLogicResult(
-                            ($offset / $i) + 1,
+                            intdiv($offset, $i) + 1,
                             $i,
                         );
                     }
