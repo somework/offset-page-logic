@@ -1,7 +1,6 @@
 # Offset Page Logic
 
-Author: [Igor Pinchuk](https://github.com/somework "Github")
-Email: i.pinchuk.work@gmail.com
+Author: [Igor Pinchuk](https://github.com/somework "GitHub") Email: <i.pinchuk.work@gmail.com>
 
 [![CI](https://img.shields.io/github/actions/workflow/status/somework/offset-page-logic/ci.yml?branch=master&label=CI)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml?query=branch%3Amaster)
 [![Latest Stable Version](https://img.shields.io/packagist/v/somework/offset-page-logic.svg)](https://packagist.org/packages/somework/offset-page-logic)
@@ -60,7 +59,6 @@ composer stan       # PHPStan static analysis
 composer cs-check   # PHP CS Fixer dry-run for coding standards
 ```
 
-License
-----
+## License
 
 MIT
