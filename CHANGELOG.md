@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
-## [2.0.0] - 2025-12-05
+## [2.0.0] - 2025-12-04
 ### Changed
 - Raised the PHP requirement to 8.2 and refreshed development tooling (PHPUnit 10, PHPStan, and PHP CS Fixer) with composer scripts to run tests, static analysis, and coding standards checks.
 - Enforced integer-only inputs for offset, limit, and nowCount with strict typing while normalizing negative values to zero.
