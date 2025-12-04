@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SomeWork/OffsetPage/Logic package.
  *
@@ -13,57 +15,38 @@ namespace SomeWork\OffsetPage\Logic;
 
 class OffsetLogicResult
 {
-    /**
-     * @var int
-     */
-    protected $page;
-    /**
-     * @var int
-     */
-    protected $size;
+    protected int $page = 0;
 
-    public function __construct($page = 0, $size = 0)
+    protected int $size = 0;
+
+    public function __construct(int|string $page = 0, int|string $size = 0)
     {
         $this->setPage($page);
         $this->setSize($size);
     }
 
-    /**
-     * @return int
-     */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
 
-    /**
-     * @param int $page
-     *
-     * @return $this
-     */
-    public function setPage($page)
+    public function setPage(int|string $page): self
     {
-        $this->page = (int) $page >= 0 ? (int) $page : 0;
+        $page = (int) $page;
+        $this->page = $page >= 0 ? $page : 0;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getSize()
+    public function getSize(): int
     {
         return $this->size;
     }
 
-    /**
-     * @param int $size
-     *
-     * @return $this
-     */
-    public function setSize($size)
+    public function setSize(int|string $size): self
     {
-        $this->size = (int) $size > 0 ? (int) $size : 0;
+        $size = (int) $size;
+        $this->size = $size > 0 ? $size : 0;
 
         return $this;
     }
