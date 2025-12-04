@@ -3,7 +3,7 @@
 Author: [Igor Pinchuk](https://github.com/somework "Github")  
 Email: i.pinchuk.work@gmail.com
 
-[![CI](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml)
+[![CI](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/somework/offset-page-logic/actions/workflows/ci.yml)
 [![Latest Stable Version](https://img.shields.io/packagist/v/somework/offset-page-logic.svg)](https://packagist.org/packages/somework/offset-page-logic)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
