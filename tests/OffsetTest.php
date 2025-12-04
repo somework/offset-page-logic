@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the SomeWork/OffsetPage/Logic package.
  *
@@ -18,24 +20,16 @@ use SomeWork\OffsetPage\Logic\Offset;
 class OffsetTest extends TestCase
 {
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     * @param $expectedResult
-     *
      * @dataProvider limitNowCountProvider
      */
-    public function testLimitNowCount($offset, $limit, $nowCount, $expectedResult)
+    public function testLimitNowCount(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
         $result = Offset::logic($offset, $limit, $nowCount);
         $this->assertEquals($expectedResult['page'], $result->getPage());
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public static function limitNowCountProvider()
+    public static function limitNowCountProvider(): array
     {
         return [
             'offset=0;limit=5;nowCount=2;' => [
@@ -69,24 +63,16 @@ class OffsetTest extends TestCase
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     * @param $expectedResult
-     *
      * @dataProvider oneMoreThanZeroProvider
      */
-    public function testOneMoreThanZero($offset, $limit, $nowCount, $expectedResult)
+    public function testOneMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
         $result = Offset::logic($offset, $limit, $nowCount);
         $this->assertEquals($expectedResult['page'], $result->getPage());
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public static function oneMoreThanZeroProvider()
+    public static function oneMoreThanZeroProvider(): array
     {
         return [
             'offset=0;limit=0;nowCount=0;' => [
@@ -125,24 +111,16 @@ class OffsetTest extends TestCase
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     * @param $expectedResult
-     *
      * @dataProvider offsetZeroProvider
      */
-    public function testOffsetZero($offset, $limit, $nowCount, $expectedResult)
+    public function testOffsetZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
         $result = Offset::logic($offset, $limit, $nowCount);
         $this->assertEquals($expectedResult['page'], $result->getPage());
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public static function offsetZeroProvider()
+    public static function offsetZeroProvider(): array
     {
         return [
             'offset=0;limit>0;nowCount=0;'                => [
@@ -174,24 +152,16 @@ class OffsetTest extends TestCase
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     * @param $expectedResult
-     *
      * @dataProvider limitZeroProvider
      */
-    public function testLimitZero($offset, $limit, $nowCount, $expectedResult)
+    public function testLimitZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
         $result = Offset::logic($offset, $limit, $nowCount);
         $this->assertEquals($expectedResult['page'], $result->getPage());
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public static function limitZeroProvider()
+    public static function limitZeroProvider(): array
     {
         return [
             'offset>0;limit=0;nowCount=0;'                 => [
@@ -234,24 +204,16 @@ class OffsetTest extends TestCase
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     * @param $expectedResult
-     *
      * @dataProvider limitOffsetMoreThanZeroProvider
      */
-    public function testLimitOffsetMoreThanZero($offset, $limit, $nowCount, $expectedResult)
+    public function testLimitOffsetMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
     {
         $result = Offset::logic($offset, $limit, $nowCount);
         $this->assertEquals($expectedResult['page'], $result->getPage());
         $this->assertEquals($expectedResult['size'], $result->getSize());
     }
 
-    /**
-     * @return array
-     */
-    public static function limitOffsetMoreThanZeroProvider()
+    public static function limitOffsetMoreThanZeroProvider(): array
     {
         return [
             'offset>0;limit>0;nowCount=0;'                                      => [
@@ -299,20 +261,16 @@ class OffsetTest extends TestCase
     }
 
     /**
-     * @param $offset
-     * @param $limit
-     * @param $nowCount
-     *
      * @dataProvider nowCountExceptionProvider
      */
-    public function testNowCountException($offset, $limit, $nowCount)
+    public function testNowCountException(int $offset, int $limit, int $nowCount): void
     {
         $this->expectException(AlreadyGetNeededCountException::class);
         $this->expectExceptionMessage('Limit is less than or equal to the current count. You should stop asking.');
         Offset::logic($offset, $limit, $nowCount);
     }
 
-    public static function nowCountExceptionProvider()
+    public static function nowCountExceptionProvider(): array
     {
         return [
             'offset=0;limit=0;nowCount>0;'                => [
