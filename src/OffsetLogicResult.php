@@ -15,11 +15,7 @@ namespace SomeWork\OffsetPage\Logic;
 
 class OffsetLogicResult
 {
-    protected int $page = 0;
-
-    protected int $size = 0;
-
-    public function __construct(int $page = 0, int $size = 0)
+    public function __construct(protected int $page = 0, protected int $size = 0)
     {
         $this->setPage($page);
         $this->setSize($size);
