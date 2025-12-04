@@ -66,7 +66,7 @@ class Offset
                     if ($offset % $i === 0) {
                         return new OffsetLogicResult(
                             ($offset / $i) + 1,
-                            $i
+                            $i,
                         );
                     }
                 }
