@@ -19,10 +19,12 @@ return (new PhpCsFixer\Config())
     ->setUsingCache(true)
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PSR2' => true,
+        '@PSR12' => true,
         'psr_autoloading' => true,
         'header_comment' => ['header' => $header],
-        'trailing_comma_in_multiline' => true,
+        'trailing_comma_in_multiline' => [
+            'elements' => ['arrays', 'arguments', 'parameters'],
+        ],
         'cast_spaces' => true,
         'no_unused_imports' => true,
         'include' => true,
