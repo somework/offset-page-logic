@@ -22,6 +22,31 @@ composer require somework/offset-page-logic
 for the given offset and limit. The method also guards against requesting more
 rows than are available.
 
+## Behavior
+
+`Offset::logic()` branches through several scenarios to normalize offset/limit inputs
+into page-based pagination:
+
+* **Unconstrained requests** – when neither `offset` nor `limit` is provided, the
+  method assumes the first page with the default page size.
+* **Offset-only** – a provided `offset` derives the page from the offset divisor with
+  the page size unchanged.
+* **Limit-only** – a provided `limit` sets the page size while the page remains `1`.
+* **Offset > limit divisor logic** – when both are provided and the offset exceeds the
+  limit, the page is calculated from the integer division `offset / limit + 1`.
+* **`AlreadyGetNeededCountException` condition** – if `offset + limit` would exceed
+  the available records (`nowCount`), the method throws
+  `AlreadyGetNeededCountException` to signal that all required rows are already
+  retrieved.
+
+| Offset | Limit | nowCount | Outcome | Notes |
+| --- | --- | --- | --- | --- |
+| `null` | `null` | `100` | Page `1`, Size default | Unconstrained request uses defaults. |
+| `20` | `null` | `100` | Page derived from offset, Size default | Offset-only scenario. |
+| `null` | `25` | `100` | Page `1`, Size `25` | Limit-only scenario. |
+| `40` | `20` | `100` | Page `3`, Size `20` | Offset > limit divisor logic (`40/20 + 1`). |
+| `80` | `30` | `100` | Throws `AlreadyGetNeededCountException` | Offset + limit exceeds available rows. |
+
 ```php
 use SomeWork\OffsetPage\Logic\Offset;
 
