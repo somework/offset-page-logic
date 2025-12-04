@@ -23,6 +23,7 @@ class OffsetTest extends TestCase
      * @dataProvider limitNowCountProvider
      *
      * @param array{page:int, size:int} $expectedResult
+     *
      * @throws AlreadyGetNeededCountException
      */
     public function testLimitNowCount(int $offset, int $limit, int $nowCount, array $expectedResult): void
@@ -90,6 +91,7 @@ class OffsetTest extends TestCase
      * @dataProvider oneMoreThanZeroProvider
      *
      * @param array{page:int, size:int} $expectedResult
+     *
      * @throws AlreadyGetNeededCountException
      */
     public function testOneMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
@@ -153,6 +155,7 @@ class OffsetTest extends TestCase
      * @dataProvider offsetZeroProvider
      *
      * @param array{page:int, size:int} $expectedResult
+     *
      * @throws AlreadyGetNeededCountException
      */
     public function testOffsetZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
@@ -209,6 +212,7 @@ class OffsetTest extends TestCase
      * @dataProvider limitZeroProvider
      *
      * @param array{page:int, size:int} $expectedResult
+     *
      * @throws AlreadyGetNeededCountException
      */
     public function testLimitZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
@@ -276,6 +280,7 @@ class OffsetTest extends TestCase
      * @dataProvider limitOffsetMoreThanZeroProvider
      *
      * @param array{page:int, size:int} $expectedResult
+     *
      * @throws AlreadyGetNeededCountException
      */
     public function testLimitOffsetMoreThanZero(int $offset, int $limit, int $nowCount, array $expectedResult): void
