@@ -34,7 +34,7 @@ class Offset
         $nowCount = $nowCount >= 0 ? $nowCount : 0;
 
         /*
-         * Means that you should get all
+         * Indicates an unconstrained request: return everything.
          */
         if ($offset === 0 && $limit === 0 && $nowCount === 0) {
             return new OffsetLogicResult(0, 0);
@@ -52,8 +52,7 @@ class Offset
             if ($limit > $nowCount) {
                 return static::logic($offset + $nowCount, $limit - $nowCount);
             }
-            // Means that you should stop fetching
-            throw new AlreadyGetNeededCountException('Limit <= no count. You should stop asking (:');
+            throw new AlreadyGetNeededCountException('Limit is less than or equal to the current count. You should stop asking (:');
         }
 
         if ($offset > 0 && $limit > 0) {
@@ -76,8 +75,8 @@ class Offset
         }
 
         /*
-         * Really its can be here oO
+         * This branch should be unreachable.
          */
-        throw new \LogicException('Something gone wrong');
+        throw new \LogicException('Unexpected offset/limit combination encountered');
     }
 }
