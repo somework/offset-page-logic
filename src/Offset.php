@@ -21,15 +21,15 @@ class Offset
      * @param int $nowCount
      *
      * @throws \LogicException
-     * @throws \SomeWork\OffsetPage\Logic\AlreadyGetNeededCountException
+     * @throws AlreadyGetNeededCountException
      *
      * @return OffsetLogicResult
      */
     public static function logic(int $offset, int $limit, int $nowCount = 0): OffsetLogicResult
     {
-        $offset = $offset >= 0 ? $offset : 0;
-        $limit = $limit >= 0 ? $limit : 0;
-        $nowCount = $nowCount >= 0 ? $nowCount : 0;
+        $offset = max($offset, 0);
+        $limit = max($limit, 0);
+        $nowCount = max($nowCount, 0);
 
         /*
          * Indicates an unconstrained request: return everything.

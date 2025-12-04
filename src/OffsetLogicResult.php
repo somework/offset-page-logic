@@ -28,7 +28,7 @@ class OffsetLogicResult
 
     public function setPage(int $page): self
     {
-        $this->page = $page >= 0 ? $page : 0;
+        $this->page = max($page, 0);
 
         return $this;
     }
@@ -40,7 +40,7 @@ class OffsetLogicResult
 
     public function setSize(int $size): self
     {
-        $this->size = $size > 0 ? $size : 0;
+        $this->size = max($size, 0);
 
         return $this;
     }
