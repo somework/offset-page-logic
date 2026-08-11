@@ -95,3 +95,15 @@ composer cs-check   # PHP CS Fixer dry-run for coding standards
 ## License
 
 MIT
+
+
+## Maintained by
+
+[Igor Pinchuk](https://github.com/somework) — I work on legacy PHP and Symfony systems:
+audits, rescue and refactoring, performance. My open-source packages have been installed
+over 70,000 times on Packagist.
+
+Inherited a codebase nobody wants to touch? Written questions get written answers —
+no discovery call required.
+[i.pinchuk.work@gmail.com](mailto:i.pinchuk.work@gmail.com) ·
+[LinkedIn](https://www.linkedin.com/in/kolgarn/)
